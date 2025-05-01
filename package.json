@@ -1,0 +1,21 @@
+{
+  "name": "playground-umc-8th-node",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "\"umc 테스트 플젝\"",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node src/index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.5.0",
+    "express": "^5.0.0",
+    "http-status-codes": "^2.3.0",
+    "mysql2": "^3.14.1",
+    "node": "^22.15.0"
+  }
+}
