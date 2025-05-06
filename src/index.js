@@ -1,3 +1,4 @@
+//index.js
 BigInt.prototype.toJSON = function () {
   return this.toString();
 };
@@ -35,7 +36,6 @@ app.post("/member_mission", handlePostMemberMission); //진행 중인 미션 추
 app.get("/reviews/:memberId", handleGetReviews);
 app.get("/missions/store/:storeId", handleGetMissions);
 app.get("/member_missions/member/:memberId", handleGetMemberMissions);
-///api/v1/stores/:storeId/reviews
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
 });
