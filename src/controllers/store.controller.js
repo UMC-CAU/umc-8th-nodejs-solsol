@@ -9,7 +9,7 @@ export const handlePatchStore = async (req, res, next) => {
 
   const storeId = req.params.storeId;
   const store = await patchStore(bodyToStore(req.body, storeId));
-  res.status(StatusCodes.OK).json({ result: store });
+  res.status(StatusCodes.OK).success(store);
 };
 
 
@@ -23,7 +23,7 @@ export const handlePostStore = async (req, res, next) => {
     const storeData = bodyToStore(req.body); // dto 변환
     console.log("data: ", storeData);
     const newStore = await createStore(storeData); // 실제 생성
-    res.status(StatusCodes.CREATED).json({ result: newStore });
+    res.status(StatusCodes.CREATED).success(newStore);
   } catch (error) {
     console.error("❌ Store 생성 실패:", error.message);
     res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ error: error.message });

@@ -10,7 +10,7 @@ export const handlePostMission = async (req, res) => {
     const missionData = bodyToMission(req.body);
     const newMission = await createMission(missionData);
 
-    res.status(StatusCodes.CREATED).json({ result: newMission });
+    res.status(StatusCodes.CREATED).success(newMission);
   } catch (error) {
     console.error("❌ 미션 생성 실패:", error.message);
     res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ error: error.message });
@@ -23,5 +23,5 @@ export const handleGetMissions = async (req, res, next) => {
     typeof req.query.cursor === "string" ? parseInt(req.query.cursor) : 0;
 
   const missions = await listMissionsByStore(storeId, cursor);
-  res.status(StatusCodes.OK).json(missions);
+  res.status(StatusCodes.OK).success(missions);
 };

@@ -5,12 +5,19 @@ export const addUser = async (data) => {
   console.log('[DEBUG] INSERT DATA:', data);
 
   // 1. 중복 이메일 체크
-  const existing = await prisma.member.findUnique({
+  const existingEmail = await prisma.member.findUnique({
     where: { email: data.email },
   });
 
-  if (existing) return null;
 
+  const existingPhoneNumber = await prisma.member.findUnique({
+    where: {phone_number : data.phoneNumber},
+  });
+
+  if(existingEmail && existingPhoneNumber) return "DUPLICATE_EMAIL_PHONENUMBER"
+  if (existingEmail) return "DUPLICATE_EMAIL";
+
+  if (existingPhoneNumber) return "DUPLICATE_PHONENUMBER";
   // 2. 유저 생성
   const created = await prisma.member.create({
     data: {

@@ -9,7 +9,7 @@ export const handlePostMemberMission = async (req, res) => {
     const data = bodyToMemberMission(req.body);
     const newMemberMission = await createMemberMission(data);
 
-    res.status(StatusCodes.CREATED).json({ result: newMemberMission });
+    res.status(StatusCodes.CREATED).success(newMemberMission);
   } catch (error) {
     console.error("❌ member_mission 생성 실패:", error.message);
     res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ error: error.message });
@@ -24,5 +24,5 @@ export const handleGetMemberMissions = async (req, res, next) => {
   const { state } = req.body;
 
   const result = await listMemberMissionsByState(memberId, state, cursor);
-  res.status(StatusCodes.OK).json(result);
+  res.status(StatusCodes.OK).success(result);
 };

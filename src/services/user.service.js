@@ -1,5 +1,11 @@
 //user.service.js
 import { responseFromUser } from "../dtos/user.dto.js";
+import { 
+  DuplicateUserEmailError,
+  DuplicateUserEmailPhoneNumberError,
+  DuplicateUserPhoneNumberError,
+  PhoneNumberNotVerifiedError
+ } from "../errors.js";
 import {
   addUser,
   getUser,
@@ -8,6 +14,9 @@ import {
 } from "../repositories/user.repository.js";
 
 export const userSignUp = async (data) => {
+  if(!data.isPhoneVerified) {
+    throw new PhoneNumberNotVerifiedError("번호 인증이 완료되지 않았습니다.", data);
+  }
   const joinUserId = await addUser({
     gender: data.gender,
     birth: data.birth,
@@ -25,8 +34,14 @@ export const userSignUp = async (data) => {
     name: data.name,
   });
 
-  if (joinUserId === null) {
-    throw new Error("이미 존재하는 이메일입니다.");
+  if (joinUserId === "DUPLICATE_EMAIL_PHONENUMBER") {
+    throw new DuplicateUserEmailPhoneNumberError("이미 존재하는 이메일, 전화번호입니다.", data);
+  }
+  if (joinUserId === "DUPLICATE_EMAIL") {
+    throw new DuplicateUserEmailError("이미 존재하는 이메일입니다.", data);
+  }
+  if (joinUserId === "DUPLICATE_PHONENUMBER") {
+    throw new DuplicateUserPhoneNumberError("이미 존재하는 전화번호입니다.", data);
   }
 
   // for (const preference of data.preferences) {

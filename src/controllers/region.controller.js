@@ -9,7 +9,7 @@ export const handlePostRegion = async (req, res) => {
     const regionData = bodyToRegion(req.body);
     const newRegion = await createRegion(regionData);
 
-    res.status(StatusCodes.CREATED).json({ result: newRegion });
+    res.status(StatusCodes.CREATED).success(newRegion);
   } catch (error) {
     console.error("❌ 지역 생성 실패:", error.message);
     res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ error: error.message });
