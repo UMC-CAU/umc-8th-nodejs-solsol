@@ -3,7 +3,8 @@
 export const bodyToStore = (body, storeId) => {
     const now = new Date();
     const store = {};
-    
+    console.log("storeId:", storeId); // 또는 req.body.storeId
+
     if (storeId !== undefined) {
       store.id = Number(storeId);
     }

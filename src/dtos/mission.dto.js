@@ -2,10 +2,10 @@ export const bodyToMission = (body) => {
     const now = new Date();
   
     return {
-      store_id: body.store_id,
+      store_id: body.storeId,
       name: body.name,
       deadline: new Date(body.deadline),
-      min_cost: body.min_cost,
+      min_cost: body.minCost,
       reward: body.reward,
       created_at: now,
       updated_at: now,

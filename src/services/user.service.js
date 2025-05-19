@@ -44,12 +44,8 @@ export const userSignUp = async (data) => {
     throw new DuplicateUserPhoneNumberError("이미 존재하는 전화번호입니다.", data);
   }
 
-  // for (const preference of data.preferences) {
-  //   await setPreference(joinUserId, preference);
-  // }
-
    const user = await getUser(joinUserId);
-  // const preferences = await getUserPreferencesByUserId(joinUserId);
+
 
   return responseFromUser({ user });
 };
